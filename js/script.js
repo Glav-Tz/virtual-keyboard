@@ -288,3 +288,28 @@ function KyeShiftUp(data) {
     }        
 }
 
+/* Функция перерисовки значений на клавишах при отжатой клавише Shift (обратно) */
+function KyeShiftDw(data) {   
+    if (data === arrKeyShift[0] || data === arrKeyShift[1] || data === "Shift" || data === "CapsLock_Sp") {        
+        if (isLangEn) {        
+            for (let elementKey of ArrPosSymbol) {
+                let KeyKey = document.querySelector(`.keyboard__key[data-keyCode = "${elementKey}"]`)
+                KeyKey.textContent = (lettersEn[elementKey])
+            }
+        } else {            
+            for (let elementKey of ArrPosSymbol) {
+                let KeyKey = document.querySelector(`.keyboard__key[data-keyCode = "${elementKey}"]`)
+                KeyKey.textContent = (lettersRu[elementKey])
+            }
+        }
+        spSymbol() // рисуем спецсимволы
+    }      
+}
+
+function tytPreGetBool() {    
+    if (localStorage.getItem("lastlang") === "true") {
+        isLangEn = false // т.к. компоненты уже написаны немного с другой логикой, конкретно тут что бы отрисовка первичная прошла коректно используется реверс-значение
+    } else {        
+        isLangEn = true //
+    }    
+}
